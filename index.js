@@ -8,19 +8,22 @@ function Circle(radius) {
     }
 }
 
-// const Circle1 = new Function( 'radius' , `
-//     this.radius = radius,
-//         this.draw = function() {
-//             console.log('draw');
-//     }
-// `)
+const circle = new Circle(1);
 
-// const circle = new Circle1(1);
+circle.location = {x : 1};
+circle['location'] = {x: 1}; // the same as dot notation above.
 
-Circle.call({}, 1); //pass in arguments 1,2,3
-Circle.apply({}, [1]); //pass in arguments in an array.
+// use case for bracket notation is when you dont yet know the property name
+// ex. const propertyName = 'location';
+// circle[propertyName] = {x: 1};
 
+for (let key in circle) {
+    if(typeof circle[key] !== 'function')
+    console.log(key, circle[key]);
+}
 
-const another = new Circle(1);
+const keys = Object.keys(circle);
+console.log(keys);
 
-Circle.location = {x : 1};
+if ('radius' in circle)
+    console.log('Circle has a radius');
